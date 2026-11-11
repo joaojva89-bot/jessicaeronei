@@ -119,6 +119,38 @@
   .p4 .brilhoJR{left:36.663%;top:2.691%;width:27.630%;height:19.438%;
     -webkit-mask-image:url(assets/p4_mono_mask.png); mask-image:url(assets/p4_mono_mask.png)}
 
+  /* Página 5 · Opções (botões) */
+  .p5 .toque{left:26.355%;top:32.017%;width:48.247%;height:2.932%; transition-delay:.5s}
+  .p5 .interagir{left:15.515%;top:35.069%;width:74.389%;height:8.199%; transition-delay:1s}
+  .p5 .div{left:28.693%;top:42.430%;width:42.083%;height:2.035%; transition-delay:3s}
+  .p5 .brilhoJR{left:37.407%;top:12.268%;width:26.780%;height:18.851%;
+    -webkit-mask-image:url(assets/p5_mono_mask.png); mask-image:url(assets/p5_mono_mask.png)}
+  .botao{position:absolute; display:block; cursor:pointer; -webkit-tap-highlight-color:transparent; z-index:4;
+    transition:transform .15s ease, filter .15s ease}
+  .botao.b1{left:19.554%;top:45.183%;width:21.254%;height:17.295%}
+  .botao.b2{left:60.680%;top:45.183%;width:19.660%;height:17.654%}
+  .botao.b3{left:40.064%;top:63.136%;width:20.723%;height:17.714%}
+  .botao .pop{position:absolute; inset:0; pointer-events:none; opacity:0; transform:scale(.5)}
+  .visivel .botao .pop{animation:pop .9s cubic-bezier(.34,1.56,.64,1) both}
+  .visivel .b1 .pop{animation-delay:3.3s} .visivel .b2 .pop{animation-delay:3.6s} .visivel .b3 .pop{animation-delay:3.9s}
+  .botao img{position:absolute; inset:0; width:100%; height:100%; transform-origin:50% 38%}
+  .visivel .botao img{animation:respira 2.4s ease-in-out 4.6s infinite}
+  .visivel .b2 img{animation-delay:5.4s} .visivel .b3 img{animation-delay:6.2s}
+  .botao .onda{position:absolute; left:50%; top:38%; width:96%; aspect-ratio:1; border-radius:50%;
+    border:2px solid rgba(214,168,90,.6); transform:translate(-50%,-50%); opacity:0}
+  .visivel .botao .onda{animation:onda 2.4s ease-out 4.6s infinite}
+  .visivel .b2 .onda{animation-delay:5.4s} .visivel .b3 .onda{animation-delay:6.2s}
+  .botao:active{transform:scale(.9); filter:brightness(1.12) drop-shadow(0 0 10px rgba(232,194,122,.7))}
+  .botao .estouro{position:absolute; left:50%; top:38%; width:70%; aspect-ratio:1; border-radius:50%; transform:translate(-50%,-50%) scale(.3);
+    background:radial-gradient(circle,rgba(255,240,205,.95) 0%,rgba(232,194,122,.55) 45%,transparent 70%); opacity:0; pointer-events:none}
+  .botao.clique .estouro{animation:estouro .6s ease-out}
+  @keyframes pop{0%{opacity:0; transform:scale(.5) translateY(20px)}60%{opacity:1}100%{opacity:1; transform:none}}
+  @keyframes estouro{0%{opacity:1; transform:translate(-50%,-50%) scale(.3)}100%{opacity:0; transform:translate(-50%,-50%) scale(1.9)}}
+  #aviso{position:fixed; left:50%; bottom:70px; transform:translate(-50%,20px); z-index:40; opacity:0; pointer-events:none;
+    background:rgba(251,244,234,.97); color:var(--marsala); border:1px solid rgba(184,134,59,.5); border-radius:24px;
+    padding:12px 22px; font-size:18px; text-align:center; width:max-content; box-shadow:0 8px 24px rgba(90,59,50,.2); transition:all .4s ease; max-width:86vw}
+  #aviso.on{opacity:1; transform:translate(-50%,0)}
+
   /* navegação: pontinhos + dica */
   #nav{position:fixed; left:50%; bottom:max(14px, env(safe-area-inset-bottom)); transform:translateX(-50%); z-index:15;
     display:none; gap:8px; align-items:center}
@@ -217,8 +249,29 @@
       </div>
     </section>
 
+    <!-- Página 5 · Opções -->
+    <section class="pagina p5" id="opcoes" data-density="soft">
+      <div class="quadro">
+        <img class="fundo" src="assets/p5_base.webp" alt="Toque nos ícones para interagir">
+        <span class="brilhoJR"></span>
+        <span class="faisca" style="left:36%;top:13%;animation-delay:1.8s"></span>
+        <span class="faisca" style="left:63%;top:17%;animation-delay:2.7s"></span>
+        <span class="faisca" style="left:62%;top:28%;animation-delay:3.5s"></span>
+        <img class="surge toque" src="assets/p5_toque.webp" alt="">
+        <img class="mao interagir" src="assets/p5_interagir.webp" alt="">
+        <img class="cresce div" src="assets/p5_div.webp" alt="">
+        <a class="botao b1" data-link="chegar" target="_blank" rel="noopener" aria-label="Saiba como chegar">
+          <span class="pop"><span class="onda"></span><img src="assets/p5_b1.webp" alt=""><span class="estouro"></span></span></a>
+        <a class="botao b2" data-link="confirmar" target="_blank" rel="noopener" aria-label="Confirmar presença">
+          <span class="pop"><span class="onda"></span><img src="assets/p5_b2.webp" alt=""><span class="estouro"></span></span></a>
+        <a class="botao b3" data-link="presentear" target="_blank" rel="noopener" aria-label="Para nos presentear">
+          <span class="pop"><span class="onda"></span><img src="assets/p5_b3.webp" alt=""><span class="estouro"></span></span></a>
+      </div>
+    </section>
+
   </div></main>
 
+  <div id="aviso" role="status"></div>
   <nav id="nav" aria-label="Páginas"></nav>
   <div id="dica" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>vire</div>
 
@@ -231,6 +284,14 @@
   <audio id="musica" src="assets/musica.mp3" loop preload="auto"></audio>
 
 <script>
+  // ====== LINKS DOS BOTÕES · preencher quando chegarem as informações ======
+  const LINKS = {
+    chegar:     '',   // link do Google Maps
+    confirmar:  '',   // ex.: https://wa.me/5561999999999?text=Olá! Confirmo minha presença no casamento de Jéssica e Rônei 💍
+    presentear: ''    // link da lista de presentes
+  };
+  // ========================================================================
+
   const audio = document.getElementById('musica');
   const som = document.getElementById('som');
 
@@ -268,13 +329,26 @@
   livro.on('flip', e=>{
     const n = e.data; paginas[n].classList.add('visivel'); marcar(n); dica.classList.add('some');
   });
+  // Botões: efeito de clique + link (ou aviso, se o link ainda não existir)
+  const aviso = document.getElementById('aviso'); let tAviso;
+  function mostrarAviso(txt){ aviso.textContent = txt; aviso.classList.add('on'); clearTimeout(tAviso); tAviso = setTimeout(()=>aviso.classList.remove('on'), 2600); }
+  document.querySelectorAll('.botao').forEach(b=>{
+    const url = LINKS[b.dataset.link]; if(url) b.href = url;
+    ['mousedown','touchstart'].forEach(ev=> b.addEventListener(ev, e=> e.stopPropagation(), {passive:true}));
+    b.addEventListener('click', e=>{
+      e.stopPropagation();
+      b.classList.remove('clique'); b.offsetWidth; b.classList.add('clique');
+      if(!LINKS[b.dataset.link]){ e.preventDefault(); mostrarAviso('Em breve! Estamos finalizando esta parte 💌'); }
+    });
+  });
+
   function observarPaginas(){ paginas[0].classList.add('visivel'); marcar(0); }
 
   // Toque rápido também vira (a biblioteca só vira com deslizar ou segurar)
   const elLivro = document.getElementById('livro'); let t0 = null;
   elLivro.addEventListener('touchstart', e=>{ const t=e.changedTouches[0]; t0 = {x:t.clientX, y:t.clientY, time:Date.now()}; }, {passive:true, capture:true});
   elLivro.addEventListener('touchend', e=>{
-    if(!t0) return; const t=e.changedTouches[0];
+    if(!t0) return; if(e.target.closest('a')){ t0=null; return; } const t=e.changedTouches[0];
     const rapido = Date.now()-t0.time < 240, parado = Math.hypot(t.clientX-t0.x, t.clientY-t0.y) < 12;
     if(rapido && parado && livro.getState()==='read'){
       const r = elLivro.getBoundingClientRect(), canto = (t.clientY - r.top) > r.height/2 ? 'bottom' : 'top';
