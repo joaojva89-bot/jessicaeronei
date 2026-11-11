@@ -114,16 +114,19 @@
   const audio = document.getElementById('musica');
   const som = document.getElementById('som');
 
+  // Começa a baixar a música logo que a página abre e no primeiro toque na tela
+  audio.load();
+  document.addEventListener('touchstart', ()=>{ if(audio.readyState === 0 && audio.networkState !== 2) audio.load(); }, {once:true, passive:true});
+
   function fadeIn(){
-    audio.volume = 0;
-    const alvo = 0.7; let v = 0;
-    const t = setInterval(()=>{ v += 0.05; audio.volume = Math.min(v, alvo); if(v >= alvo) clearInterval(t); }, 120);
+    audio.volume = 0.45; let v = 0.45;
+    const t = setInterval(()=>{ v += 0.08; audio.volume = Math.min(v, 0.85); if(v >= 0.85) clearInterval(t); }, 80);
   }
 
   document.getElementById('abrir').addEventListener('click', ()=>{
     document.getElementById('abertura').classList.add('aberta');
     document.body.classList.add('entrou');
-    audio.play().then(fadeIn).catch(()=> som.classList.add('mudo'));
+    fadeIn(); audio.play().catch(()=> som.classList.add('mudo'));
   });
 
   som.addEventListener('click', ()=>{
