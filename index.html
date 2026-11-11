@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jéssica & Rônei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{ --marsala:#7a1f2b; --ouro:#b8863b; --creme:#f6ece0; --texto:#5a3b32; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:radial-gradient(ellipse at top, #fbf4ea 0%, var(--creme) 60%, #efe0cf 100%);
+    color:var(--texto); font-family:'Cormorant Garamond',Georgia,serif;
+    display:flex; align-items:center; justify-content:center; text-align:center; padding:32px 20px; min-height:100vh;
+  }
+  .wrap{max-width:420px; width:100%; animation:sobe 1.4s ease-out both}
+  .selo{
+    width:92px;height:92px;margin:0 auto 28px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #e8c27a, var(--ouro) 55%, #8a5f22 100%);
+    box-shadow:0 6px 18px rgba(122,31,43,.25), inset 0 0 0 6px rgba(255,255,255,.12);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Great Vibes',cursive;font-size:42px;color:#5b3d12;
+    animation:pulsa 2.8s ease-in-out infinite;
+  }
+  h1{font-family:'Great Vibes',cursive;font-weight:400;color:var(--marsala);font-size:clamp(46px,13vw,64px);line-height:1.1}
+  .linha{display:flex;align-items:center;gap:12px;margin:18px auto;max-width:280px}
+  .linha span{flex:1;height:1px;background:var(--ouro)}
+  .linha i{width:9px;height:9px;background:var(--ouro);transform:rotate(45deg)}
+  .data{letter-spacing:.32em;font-size:18px;font-weight:600;color:var(--marsala)}
+  p.msg{margin-top:22px;font-size:20px;line-height:1.5}
+  .emb{margin-top:30px;font-size:14px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro)}
+  @keyframes sobe{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  @keyframes pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="selo">JR</div>
+    <h1>Jéssica &amp; Rônei</h1>
+    <div class="linha"><span></span><i></i><span></span></div>
+    <div class="data">12 · 02 · 2027</div>
+    <p class="msg">Estamos preparando cada detalhe deste convite com muito carinho.</p>
+    <div class="emb">Em breve</div>
+  </main>
+</body>
+</html>
