@@ -69,7 +69,7 @@
 
   /* texto "sendo escrito": revela da esquerda pra direita */
   .escreve{opacity:0; clip-path:inset(0 100% 0 0); transition:clip-path 1.1s cubic-bezier(.5,0,.3,1), opacity .5s ease}
-  .visivel .escreve{opacity:1; clip-path:inset(0 0 0 0)}
+  .visivel .escreve, .p3.visivel .nomes{opacity:1; clip-path:inset(0 0 0 0)}
   .cresce{opacity:0; transform:scaleX(0); transition:transform 1s cubic-bezier(.3,0,.2,1), opacity .6s ease}
   .visivel .cresce{opacity:1; transform:none}
   .surge{opacity:0; transform:translateY(12px); transition:opacity 1s ease, transform 1s ease}
@@ -81,6 +81,33 @@
   .p2 .l4{left:36.982%;top:30.801%;width:41.870%;height:2.811%; transition-delay:2.95s}
   .p2 .div{left:30.606%;top:34.270%;width:49.522%;height:2.392%; transition-delay:3.8s}
   .p2 .ref{left:41.658%;top:36.603%;width:27.630%;height:2.512%; transition-delay:4.4s}
+
+  .p3 .nomes{left:20.191%;top:25.359%;width:66.100%;height:8.792%; clip-path:inset(0 100% 0 0);
+    transition:clip-path 2.6s cubic-bezier(.45,.05,.35,1) 1s, opacity .4s ease 1s}
+  .p3 .div{left:21.254%;top:33.254%;width:58.448%;height:2.213%; transition-delay:3.4s}
+  .p3 .data{left:24.230%;top:35.706%;width:57.386%;height:2.811%; opacity:0; clip-path:inset(0 50% 0 50%); filter:blur(3px);
+    transition:clip-path 1.4s cubic-bezier(.3,0,.2,1) 4s, opacity .6s ease 4s, filter 1.4s ease 4s}
+  .p3.visivel .data{opacity:1; clip-path:inset(0 0 0 0); filter:none}
+
+  /* brilho dourado passando pelo monograma JR */
+  .brilhoJR{position:absolute; left:37.832%; top:5.502%; width:26.355%; height:19.139%; pointer-events:none;
+    -webkit-mask:url(assets/p3_mono_mask.png) center/100% 100% no-repeat; mask:url(assets/p3_mono_mask.png) center/100% 100% no-repeat;
+    background:linear-gradient(115deg,transparent 38%,rgba(255,244,214,.95) 50%,transparent 62%) no-repeat; background-size:300% 100%;
+    background-position:120% 0; mix-blend-mode:screen}
+  .visivel .brilhoJR{animation:reluz 6s ease-in-out 1.6s infinite}
+  @keyframes reluz{0%{background-position:120% 0}30%,100%{background-position:-20% 0}}
+  .faisca{position:absolute; width:1.6%; aspect-ratio:1; pointer-events:none; opacity:0;
+    background:radial-gradient(circle,#fff6dc 0%,#e8c27a 35%,transparent 70%); clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%)}
+  .visivel .faisca{animation:pisca 3.2s ease-in-out infinite}
+  @keyframes pisca{0%,100%{opacity:0;transform:scale(.4) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(45deg)}}
+
+  /* indicação para rolar */
+  .rolar{position:absolute; left:50%; bottom:max(10px, env(safe-area-inset-bottom)); transform:translateX(-50%);
+    color:var(--ouro); opacity:0; transition:opacity 1s ease 5s; pointer-events:none}
+  .visivel .rolar{opacity:.9}
+  .rolar svg{width:26px; height:26px; animation:desce 1.8s ease-in-out infinite}
+  @keyframes desce{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+  .pagina{position:relative}
 
   /* ---------- Botão de música ---------- */
   #som{
@@ -126,6 +153,22 @@
         <img class="escreve l4" src="assets/p2_l4.webp" alt="">
         <img class="cresce div" src="assets/p2_div.webp" alt="">
         <img class="surge ref" src="assets/p2_ref.webp" alt="">
+      </div>
+      <div class="rolar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+    </section>
+
+    <!-- Página 3 · Data -->
+    <section class="pagina p3" id="data">
+      <div class="quadro">
+        <img class="fundo" src="assets/p3_base.webp" alt="Monograma JR. Jéssica e Rônei, 12 de fevereiro de 2027">
+        <span class="brilhoJR"></span>
+        <span class="faisca" style="left:36%;top:7%;animation-delay:2s"></span>
+        <span class="faisca" style="left:63%;top:11%;animation-delay:2.9s"></span>
+        <span class="faisca" style="left:61%;top:22%;animation-delay:3.6s"></span>
+        <span class="faisca" style="left:38%;top:19%;animation-delay:4.4s"></span>
+        <img class="nomes" src="assets/p3_nomes.webp" alt="">
+        <img class="cresce div" src="assets/p3_div.webp" alt="">
+        <img class="data" src="assets/p3_data.webp" alt="">
       </div>
     </section>
 
