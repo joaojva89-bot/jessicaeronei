@@ -55,17 +55,27 @@
   }
 
   /* ---------- Páginas ---------- */
-  html{scroll-snap-type:y mandatory}
-  body:not(.entrou){overflow:hidden}
-  .pagina{
-    min-height:100svh; display:flex; align-items:center; justify-content:center; scroll-snap-align:start;
-    background:linear-gradient(180deg,#fbe8d4 0%,#fcefe1 100%);
-  }
+  body{overflow:hidden; touch-action:pan-x pinch-zoom}
+  #paginas{position:fixed; inset:0; perspective:2200px; perspective-origin:50% 50%; overflow:hidden; background:#efdcc6}
+  .pagina{position:absolute; inset:0; visibility:hidden; transform-style:preserve-3d; transform-origin:0 50%; z-index:1}
+  .pagina.ativa{visibility:visible; z-index:2}
+  .pagina.baixo{visibility:visible; z-index:1}
+  .pagina.vira{visibility:visible; z-index:3; transition:transform 1.15s cubic-bezier(.45,.05,.25,1)}
+  .frente,.verso{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden}
+  .frente{display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#fbe8d4 0%,#fcefe1 100%)}
+  .verso{transform:rotateY(180deg); background:linear-gradient(90deg,#e9d6bf 0%,#f6e8d7 30%,#fbefe2 100%)}
+  /* sombra que acompanha a virada */
+  .sombra{position:absolute; inset:0; pointer-events:none; opacity:0; z-index:5}
+  .vira .frente .sombra{background:linear-gradient(90deg,rgba(60,30,20,0) 30%,rgba(60,30,20,.28) 100%); animation:somb 1.15s ease forwards}
+  .baixo .frente .sombra{background:linear-gradient(90deg,rgba(60,30,20,.35),rgba(60,30,20,.05)); animation:somb2 1.15s ease forwards}
+  @keyframes somb{0%{opacity:0}100%{opacity:1}}
+  @keyframes somb2{0%{opacity:1}100%{opacity:0}}
   .quadro{position:relative; width:min(100vw, calc(100svh * 941 / 1672)); aspect-ratio:941/1672; overflow:hidden}
   .quadro img{position:absolute; display:block; user-select:none; -webkit-user-drag:none}
   .quadro .fundo{inset:0; width:100%; height:100%; opacity:0; transform:scale(1.06); filter:blur(6px);
     transition:opacity 1.4s ease, transform 2.6s cubic-bezier(.2,.6,.2,1), filter 1.4s ease}
   .visivel .fundo{opacity:1; transform:none; filter:none}
+  .pronta .fundo{opacity:1; transform:none; filter:none; transition:none}
 
   /* texto "sendo escrito": revela da esquerda pra direita */
   .escreve{opacity:0; clip-path:inset(0 100% 0 0); transition:clip-path 1.1s cubic-bezier(.5,0,.3,1), opacity .5s ease}
@@ -101,13 +111,21 @@
   .visivel .faisca{animation:pisca 3.2s ease-in-out infinite}
   @keyframes pisca{0%,100%{opacity:0;transform:scale(.4) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(45deg)}}
 
-  /* indicação para rolar */
-  .rolar{position:absolute; left:50%; bottom:max(10px, env(safe-area-inset-bottom)); transform:translateX(-50%);
-    color:var(--ouro); opacity:0; transition:opacity 1s ease 5s; pointer-events:none}
-  .visivel .rolar{opacity:.9}
-  .rolar svg{width:26px; height:26px; animation:desce 1.8s ease-in-out infinite}
-  @keyframes desce{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
-  .pagina{position:relative}
+  /* navegação: pontinhos + dica */
+  #nav{position:fixed; left:50%; bottom:max(14px, env(safe-area-inset-bottom)); transform:translateX(-50%); z-index:15;
+    display:none; gap:8px; align-items:center}
+  body.entrou #nav{display:flex}
+  #nav i{width:7px; height:7px; border-radius:50%; background:rgba(184,134,59,.35); transition:all .4s}
+  #nav i.on{background:var(--ouro); width:18px; border-radius:4px}
+  #dica{position:fixed; right:10px; top:50%; transform:translateY(-50%); z-index:15; color:var(--ouro);
+    display:none; flex-direction:column; align-items:center; gap:4px; font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+    background:rgba(251,244,234,.75); padding:10px 6px; border-radius:20px; backdrop-filter:blur(3px); pointer-events:none;
+    transition:opacity .6s}
+  body.entrou #dica{display:flex; animation:aparece .8s ease 4.5s both}
+  #dica.some{opacity:0}
+  #dica svg{width:22px; height:22px; animation:lado 1.6s ease-in-out infinite}
+  @keyframes lado{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+  @keyframes aparece{from{opacity:0}to{opacity:1}}
 
   /* ---------- Botão de música ---------- */
   #som{
@@ -145,6 +163,7 @@
 
     <!-- Página 2 · Mateus 19:6 -->
     <section class="pagina p2" id="versiculo">
+     <div class="frente"><span class="sombra"></span>
       <div class="quadro">
         <img class="fundo" src="assets/p2_base.webp" alt="Jéssica e Rônei abraçados. Assim, eles já não são dois, mas sim uma só carne. Portanto, ninguém separe o que Deus uniu. Mateus 19:6">
         <img class="escreve l1" src="assets/p2_l1.webp" alt="">
@@ -154,11 +173,13 @@
         <img class="cresce div" src="assets/p2_div.webp" alt="">
         <img class="surge ref" src="assets/p2_ref.webp" alt="">
       </div>
-      <div class="rolar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+     </div>
+     <div class="verso"></div>
     </section>
 
     <!-- Página 3 · Data -->
     <section class="pagina p3" id="data">
+     <div class="frente"><span class="sombra"></span>
       <div class="quadro">
         <img class="fundo" src="assets/p3_base.webp" alt="Monograma JR. Jéssica e Rônei, 12 de fevereiro de 2027">
         <span class="brilhoJR"></span>
@@ -170,9 +191,14 @@
         <img class="cresce div" src="assets/p3_div.webp" alt="">
         <img class="data" src="assets/p3_data.webp" alt="">
       </div>
+     </div>
+     <div class="verso"></div>
     </section>
 
   </main>
+
+  <nav id="nav" aria-label="Páginas"></nav>
+  <div id="dica" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>vire</div>
 
   <button id="som" aria-label="Pausar ou tocar música">
     <span class="barras"><b></b><b></b><b></b></span>
@@ -202,11 +228,54 @@
     abertura.classList.add('abrindo');
     setTimeout(()=>{ abertura.classList.add('fim'); document.body.classList.add('entrou'); observarPaginas(); }, 2050);
   }
-  // Cada página anima quando aparece na tela
-  function observarPaginas(){
-    const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visivel'); }), {threshold:.45});
-    document.querySelectorAll('.pagina').forEach(p=>io.observe(p));
+  // ---------- Virar páginas como um livro ----------
+  const paginas = [...document.querySelectorAll('.pagina')];
+  const nav = document.getElementById('nav'), dica = document.getElementById('dica');
+  let atual = 0, ocupado = false;
+  paginas.forEach(()=> nav.appendChild(document.createElement('i')));
+  function marcar(){ [...nav.children].forEach((d,i)=>d.classList.toggle('on', i===atual)); }
+  function observarPaginas(){ paginas[0].classList.add('ativa','visivel'); marcar(); }
+
+  function virar(dir){
+    const destino = atual + dir;
+    if(ocupado || destino < 0 || destino >= paginas.length) return;
+    ocupado = true; dica.classList.add('some');
+    const de = paginas[atual], para = paginas[destino];
+    if(dir > 0){
+      // página atual gira pela borda esquerda e revela a próxima
+      para.classList.add('baixo','pronta','visivel');
+      de.classList.add('vira'); de.offsetWidth; de.style.transform = 'rotateY(-178deg)';
+      setTimeout(()=>{ de.classList.remove('vira','ativa'); de.style.transform=''; para.classList.replace('baixo','ativa'); fim(destino); }, 1180);
+    } else {
+      // página anterior volta por cima
+      para.style.transition = 'none'; para.style.transform = 'rotateY(-178deg)';
+      para.classList.add('vira'); de.classList.add('baixo');
+      para.offsetWidth; para.style.transition = '';
+      requestAnimationFrame(()=> requestAnimationFrame(()=>{ para.style.transform = 'rotateY(0deg)'; }));
+      setTimeout(()=>{ para.classList.remove('vira'); para.style.transform=''; para.classList.add('ativa'); de.classList.remove('baixo','ativa'); fim(destino); }, 1180);
+    }
   }
+  function fim(i){ atual = i; ocupado = false; marcar(); }
+
+  // toque: lado direito avança, lado esquerdo volta · deslizar também funciona
+  let x0 = null, y0 = null;
+  const area = document.getElementById('paginas');
+  area.addEventListener('touchstart', e=>{ x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, {passive:true});
+  area.addEventListener('touchend', e=>{
+    if(x0===null) return;
+    const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)){ virar(dx < 0 ? 1 : -1); e.preventDefault(); }
+    x0 = null;
+  });
+  area.addEventListener('click', e=>{
+    if(e.target.closest('a,button')) return;
+    virar(e.clientX < innerWidth * 0.3 ? -1 : 1);
+  });
+  document.addEventListener('keydown', e=>{
+    if(!document.body.classList.contains('entrou')) return;
+    if(e.key==='ArrowRight') virar(1); if(e.key==='ArrowLeft') virar(-1);
+  });
+
   abertura.addEventListener('click', abrir);
   abertura.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') abrir(); });
 
