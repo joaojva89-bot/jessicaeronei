@@ -101,6 +101,24 @@
   .visivel .faisca{animation:pisca 3.2s ease-in-out infinite}
   @keyframes pisca{0%,100%{opacity:0;transform:scale(.4) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(45deg)}}
 
+  /* efeitos genéricos extras */
+  .mao{opacity:0; clip-path:inset(0 100% 0 0); transition:clip-path 2.4s cubic-bezier(.45,.05,.35,1), opacity .4s ease}
+  .visivel .mao{opacity:1; clip-path:inset(0 0 0 0)}
+  .abre{opacity:0; clip-path:inset(0 50% 0 50%); filter:blur(3px); transition:clip-path 1.4s cubic-bezier(.3,0,.2,1), opacity .6s ease, filter 1.4s ease}
+  .visivel .abre{opacity:1; clip-path:inset(0 0 0 0); filter:none}
+
+  /* Página 4 · Convite */
+  .p4 .juntos{left:31.456%;top:23.206%;width:36.982%;height:1.794%; transition-delay:.6s}
+  .p4 .div1{left:32.944%;top:25.179%;width:34.006%;height:1.794%; transition-delay:1s}
+  .p4 .nomes{left:18.278%;top:26.734%;width:67.375%;height:8.134%; transition-delay:1.3s}
+  .p4 .convidam{left:15.197%;top:35.586%;width:69.819%;height:2.333%; transition-delay:3.5s}
+  .p4 .div2{left:16.472%;top:78.230%;width:66.419%;height:1.794%; transition-delay:4.1s}
+  .p4 .data{left:18.916%;top:80.502%;width:62.062%;height:2.452%; transition-delay:4.5s}
+  .p4 .pres1{left:22.742%;top:84.211%;width:54.623%;height:2.213%; transition-delay:5.3s}
+  .p4 .pres2{left:32.094%;top:86.603%;width:35.707%;height:1.734%; transition-delay:6s}
+  .p4 .brilhoJR{left:36.663%;top:2.691%;width:27.630%;height:19.438%;
+    -webkit-mask-image:url(assets/p4_mono_mask.png); mask-image:url(assets/p4_mono_mask.png)}
+
   /* navegação: pontinhos + dica */
   #nav{position:fixed; left:50%; bottom:max(14px, env(safe-area-inset-bottom)); transform:translateX(-50%); z-index:15;
     display:none; gap:8px; align-items:center}
@@ -176,6 +194,26 @@
         <img class="nomes" src="assets/p3_nomes.webp" alt="">
         <img class="cresce div" src="assets/p3_div.webp" alt="">
         <img class="data" src="assets/p3_data.webp" alt="">
+      </div>
+    </section>
+
+    <!-- Página 4 · Convite -->
+    <section class="pagina p4" id="convite" data-density="soft">
+      <div class="quadro">
+        <img class="fundo" src="assets/p4_base.webp" alt="Juntos, para sempre. Jéssica e Rônei convidam você para o nosso casamento. 12 de fevereiro de 2027. Sua presença tornará este dia ainda mais especial.">
+        <span class="brilhoJR"></span>
+        <span class="faisca" style="left:35%;top:4%;animation-delay:1.8s"></span>
+        <span class="faisca" style="left:63%;top:8%;animation-delay:2.7s"></span>
+        <span class="faisca" style="left:62%;top:19%;animation-delay:3.5s"></span>
+        <span class="faisca" style="left:36%;top:16%;animation-delay:4.3s"></span>
+        <img class="surge juntos" src="assets/p4_juntos.webp" alt="">
+        <img class="cresce div1" src="assets/p4_div1.webp" alt="">
+        <img class="mao nomes" src="assets/p4_nomes.webp" alt="">
+        <img class="surge convidam" src="assets/p4_convidam.webp" alt="">
+        <img class="cresce div2" src="assets/p4_div2.webp" alt="">
+        <img class="abre data" src="assets/p4_data.webp" alt="">
+        <img class="escreve pres1" src="assets/p4_pres1.webp" alt="">
+        <img class="escreve pres2" src="assets/p4_pres2.webp" alt="">
       </div>
     </section>
 
