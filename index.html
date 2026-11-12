@@ -82,12 +82,19 @@
   .p2 .div{left:30.606%;top:34.270%;width:49.522%;height:2.392%; transition-delay:3.8s}
   .p2 .ref{left:41.658%;top:36.603%;width:27.630%;height:2.512%; transition-delay:4.4s}
 
-  .p3 .nomes{left:26.674%;top:27.632%;width:51.860%;height:5.383%; clip-path:inset(0 100% 0 0);
+  .p3 .nomes{left:26.674%;top:26.196%;width:51.860%;height:5.383%; clip-path:inset(0 100% 0 0);
     transition:clip-path 2.2s cubic-bezier(.45,.05,.35,1) 1s, opacity .4s ease 1s}
-  .p3 .div{left:21.254%;top:33.254%;width:58.448%;height:2.213%; transition-delay:3.4s}
-  .p3 .data{left:24.230%;top:35.706%;width:57.386%;height:2.811%; opacity:0; clip-path:inset(0 50% 0 50%); filter:blur(3px);
-    transition:clip-path 1.4s cubic-bezier(.3,0,.2,1) 4s, opacity .6s ease 4s, filter 1.4s ease 4s}
-  .p3.visivel .data{opacity:1; clip-path:inset(0 0 0 0); filter:none}
+  .p3 .div{left:21.254%;top:31.818%;width:58.448%;height:2.213%; transition-delay:3.4s}
+  .p3 .mes{left:44.102%;top:34.569%;width:17.003%;height:1.077%; transition-delay:3.7s}
+  .p3 .linha{left:27.843%;top:35.885%;width:44.952%;height:2.213%; transition-delay:4s}
+  .p3 .ano{left:49.522%;top:38.577%;width:6.270%;height:1.077%; transition-delay:4.7s}
+  .p3 .local{position:absolute; left:28.0%; top:89.2%; width:44.0%; height:8.9%; display:block; z-index:4; -webkit-tap-highlight-color:transparent}
+  .p3 .local img{position:absolute; pointer-events:none}
+  .p3 .local:active{filter:brightness(1.15)}
+  .p3 .igreja1{left:5.439%;top:9.124%;width:81.393%;height:19.483%; transition-delay:5.3s}
+  .p3 .igreja2{left:10.752%;top:31.303%;width:71.250%;height:20.831%; transition-delay:5.9s}
+  .p3 .end1{left:7.614%;top:62.213%;width:77.286%;height:17.472%; transition-delay:6.6s}
+  .p3 .end2{left:31.523%;top:80.360%;width:29.707%;height:14.787%; transition-delay:6.9s}
 
   /* brilho dourado passando pelo monograma JR */
   .brilhoJR{position:absolute; left:37.832%; top:5.502%; width:26.355%; height:19.139%; pointer-events:none;
@@ -217,7 +224,7 @@
     <!-- Página 3 · Data -->
     <section class="pagina p3" id="data" data-density="soft">
       <div class="quadro">
-        <img class="fundo" src="assets/p3_base.webp" alt="Monograma JR. Save the date: 12 de fevereiro de 2027">
+        <img class="fundo" src="assets/p3_base.webp" alt="Save the date. Sexta-feira, 12 de fevereiro de 2027, às 20:30h. Paróquia Imaculado Coração de Maria, St. C Norte QNC 12, Taguatinga, Brasília - DF">
         <span class="brilhoJR"></span>
         <span class="faisca" style="left:36%;top:7%;animation-delay:2s"></span>
         <span class="faisca" style="left:63%;top:11%;animation-delay:2.9s"></span>
@@ -225,7 +232,15 @@
         <span class="faisca" style="left:38%;top:19%;animation-delay:4.4s"></span>
         <img class="nomes" src="assets/p3_save.webp" alt="">
         <img class="cresce div" src="assets/p3_div.webp" alt="">
-        <img class="data" src="assets/p3_data.webp" alt="">
+        <img class="surge mes" src="assets/p3_mes.webp" alt="">
+        <img class="abre linha" src="assets/p3_linha.webp" alt="">
+        <img class="surge ano" src="assets/p3_ano.webp" alt="">
+        <a class="local" href="https://www.google.com/maps/search/?api=1&query=Par%C3%B3quia+Imaculado+Cora%C3%A7%C3%A3o+de+Maria+QNC+12+Taguatinga+Bras%C3%ADlia+DF" target="_blank" rel="noopener" aria-label="Abrir local no mapa: Paróquia Imaculado Coração de Maria">
+          <img class="escreve igreja1" src="assets/p3_igreja1.webp" alt="">
+          <img class="escreve igreja2" src="assets/p3_igreja2.webp" alt="">
+          <img class="surge end1" src="assets/p3_end1.webp" alt="">
+          <img class="surge end2" src="assets/p3_end2.webp" alt="">
+        </a>
       </div>
     </section>
 
@@ -286,7 +301,7 @@
 <script>
   // ====== LINKS DOS BOTÕES · preencher quando chegarem as informações ======
   const LINKS = {
-    chegar:     '',   // link do Google Maps
+    chegar:     'https://www.google.com/maps/search/?api=1&query=Par%C3%B3quia+Imaculado+Cora%C3%A7%C3%A3o+de+Maria+QNC+12+Taguatinga+Bras%C3%ADlia+DF',
     confirmar:  '',   // ex.: https://wa.me/5561999999999?text=Olá! Confirmo minha presença no casamento de Jéssica e Rônei 💍
     presentear: ''    // link da lista de presentes
   };
@@ -340,6 +355,12 @@
       b.classList.remove('clique'); b.offsetWidth; b.classList.add('clique');
       if(!LINKS[b.dataset.link]){ e.preventDefault(); mostrarAviso('Em breve! Estamos finalizando esta parte 💌'); }
     });
+  });
+
+  // Endereço tocável (abre o mapa) sem virar a página
+  document.querySelectorAll('.local').forEach(l=>{
+    ['mousedown','touchstart'].forEach(ev=> l.addEventListener(ev, e=> e.stopPropagation(), {passive:true}));
+    l.addEventListener('click', e=> e.stopPropagation());
   });
 
   function observarPaginas(){ paginas[0].classList.add('visivel'); marcar(0); }
