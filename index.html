@@ -355,7 +355,7 @@
   });
   livro.loadFromHTML(paginas);
   livro.on('flip', e=>{
-    const n = e.data; paginas[n].classList.add('visivel'); marcar(n); dica.classList.add('some');
+    const n = e.data; paginas[n].classList.add('visivel'); marcar(n); atualizarDica(n);
   });
   // Botões: efeito de clique + link (ou aviso, se o link ainda não existir)
   const aviso = document.getElementById('aviso'); let tAviso;
@@ -376,6 +376,15 @@
     l.addEventListener('click', e=> e.stopPropagation());
   });
 
+  // Dica "vire" em todas as páginas, menos na última
+  function atualizarDica(n){
+    dica.classList.add('some');                       // some durante a troca
+    if(n < paginas.length - 1){
+      dica.style.animationDelay = '2.2s';             // reaparece com calma na nova página
+      requestAnimationFrame(()=> dica.classList.remove('some'));
+    }
+  }
+  livro.on('changeState', e=>{ if(e.data !== 'read') dica.classList.add('some'); });
   function observarPaginas(){ paginas[0].classList.add('visivel'); marcar(0); }
 
   // Toque rápido também vira (a biblioteca só vira com deslizar ou segurar)
