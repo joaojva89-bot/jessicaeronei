@@ -112,10 +112,27 @@
   .p4 .div1{left:32.944%;top:25.179%;width:34.006%;height:1.794%; transition-delay:1s}
   .p4 .nomes{left:18.278%;top:26.734%;width:67.375%;height:8.134%; transition-delay:1.3s}
   .p4 .convidam{left:16.366%;top:35.825%;width:67.163%;height:1.854%; transition-delay:3.5s}
-  .p4 .div2{left:16.472%;top:78.230%;width:66.419%;height:1.794%; transition-delay:4.1s}
-  .p4 .data{left:18.916%;top:80.502%;width:62.062%;height:2.452%; transition-delay:4.5s}
-  .p4 .pres1{left:22.742%;top:84.211%;width:54.623%;height:2.213%; transition-delay:5.3s}
-  .p4 .pres2{left:32.094%;top:86.603%;width:35.707%;height:1.734%; transition-delay:6s}
+  .p4 .div2{left:16.472%;top:78.230%;width:66.419%;height:1.794%; transition-delay:6.2s}
+  .p4 .data{left:18.916%;top:80.502%;width:62.062%;height:2.452%; transition-delay:6.5s}
+  .p4 .pres1{left:22.742%;top:84.211%;width:54.623%;height:2.213%; transition-delay:7.2s}
+  .p4 .pres2{left:32.094%;top:86.603%;width:35.707%;height:1.734%; transition-delay:7.8s}
+  .p4 .local{position:absolute; left:20.191%; top:43.361%; width:59.511%; height:27.811%; display:block; z-index:4; -webkit-tap-highlight-color:transparent}
+  .p4 .local img{position:absolute; pointer-events:none}
+  .p4 .local:active{filter:brightness(1.12)}
+  .p4 .pin{left:44.107%;top:1.720%;width:11.786%;height:20.860%; transition-delay:3.6s}
+  .p4 .ig1{left:1.429%;top:29.462%;width:97.143%;height:9.677%; transition-delay:3.9s}
+  .p4 .ig2{left:7.143%;top:40.645%;width:85.536%;height:10.323%; transition-delay:4.4s}
+  .p4 .div3{left:21.964%;top:53.978%;width:56.250%;height:5.591%; transition-delay:4.9s}
+  .p4 .en1{left:8.393%;top:66.452%;width:83.214%;height:7.527%; transition-delay:5.2s}
+  .p4 .en2{left:33.929%;top:74.839%;width:32.143%;height:6.237%; transition-delay:5.4s}
+  .p4 .mapa{left:13.929%;top:93.548%;width:71.964%;height:4.731%; transition-delay:5.8s}
+  .cai{opacity:0; transform:translateY(-40px)}
+  .visivel .cai{animation:cai 1s cubic-bezier(.34,1.56,.64,1) both, quica 2.6s ease-in-out infinite}
+  .p4.visivel .pin{animation-delay:3.6s, 5s}
+  @keyframes cai{0%{opacity:0; transform:translateY(-40px)}100%{opacity:1; transform:none}}
+  @keyframes quica{0%,100%{transform:none}50%{transform:translateY(-6px)}}
+  .p4.visivel .mapa{animation:piscaMapa 2.4s ease-in-out 7s infinite}
+  @keyframes piscaMapa{0%,100%{opacity:1}50%{opacity:.45}}
   .p4 .brilhoJR{left:36.663%;top:2.691%;width:27.630%;height:19.438%;
     -webkit-mask-image:url(assets/p4_mono_mask.png); mask-image:url(assets/p4_mono_mask.png)}
 
@@ -234,7 +251,7 @@
     <!-- Página 4 · Convite -->
     <section class="pagina p4" id="convite" data-density="soft">
       <div class="quadro">
-        <img class="fundo" src="assets/p4_base.webp" alt="Juntos, para sempre. Jéssica e Rônei convidam você para o seu casamento. 12 de fevereiro de 2027. Sua presença tornará este dia ainda mais especial.">
+        <img class="fundo" src="assets/p4_base.webp" alt="Juntos, para sempre. Jéssica e Rônei convidam você para o seu casamento. Paróquia Imaculado Coração de Maria, St. C Norte QNC 12, Taguatinga, Brasília - DF. 12 de fevereiro de 2027. Sua presença tornará este dia ainda mais especial.">
         <span class="brilhoJR"></span>
         <span class="faisca" style="left:35%;top:4%;animation-delay:1.8s"></span>
         <span class="faisca" style="left:63%;top:8%;animation-delay:2.7s"></span>
@@ -244,6 +261,15 @@
         <img class="cresce div1" src="assets/p4_div1.webp" alt="">
         <img class="mao nomes" src="assets/p4_nomes.webp" alt="">
         <img class="surge convidam" src="assets/p4_convidam.webp" alt="">
+        <a class="local" href="https://www.google.com/maps/search/?api=1&query=Par%C3%B3quia+Imaculado+Cora%C3%A7%C3%A3o+de+Maria+QNC+12+Taguatinga+Bras%C3%ADlia+DF" target="_blank" rel="noopener" aria-label="Abrir no mapa: Paróquia Imaculado Coração de Maria, St. C Norte QNC 12, Taguatinga, Brasília - DF">
+          <img class="cai pin" src="assets/p4_pin.webp" alt="">
+          <img class="escreve ig1" src="assets/p4_ig1.webp" alt="">
+          <img class="escreve ig2" src="assets/p4_ig2.webp" alt="">
+          <img class="cresce div3" src="assets/p4_div3.webp" alt="">
+          <img class="surge en1" src="assets/p4_en1.webp" alt="">
+          <img class="surge en2" src="assets/p4_en2.webp" alt="">
+          <img class="surge mapa" src="assets/p4_mapa.webp" alt="">
+        </a>
         <img class="cresce div2" src="assets/p4_div2.webp" alt="">
         <img class="abre data" src="assets/p4_data.webp" alt="">
         <img class="escreve pres1" src="assets/p4_pres1.webp" alt="">
