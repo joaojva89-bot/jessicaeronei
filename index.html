@@ -312,6 +312,12 @@
   <audio id="musica" src="assets/musica.mp3" loop preload="auto"></audio>
 
 <script>
+  // ====== MODO DO CONVITE ======
+  //  'save-the-date' → depois da carta, mostra só a página do Save the date
+  //  'completo'      → mostra todas as páginas (versículo, save the date, convite, opções)
+  const MODO = 'save-the-date';
+  // ==============================
+
   // ====== LINKS DOS BOTÕES · preencher quando chegarem as informações ======
   const LINKS = {
     chegar:     'https://www.google.com/maps/search/?api=1&query=Par%C3%B3quia+Imaculado+Cora%C3%A7%C3%A3o+de+Maria+QNC+12+Taguatinga+Bras%C3%ADlia+DF',
@@ -341,9 +347,15 @@
     setTimeout(()=>{ abertura.classList.add('fim'); document.body.classList.add('entrou'); observarPaginas(); }, 2050);
   }
   // ---------- Virar páginas como folha de papel (StPageFlip, MIT) ----------
+  if(MODO === 'save-the-date'){
+    // as outras páginas continuam no código, só não entram no livro por enquanto
+    document.querySelectorAll('.pagina:not(.p3)').forEach(p=> p.remove());
+  }
   const paginas = [...document.querySelectorAll('.pagina')];
+  const unica = paginas.length < 2;
   const nav = document.getElementById('nav'), dica = document.getElementById('dica');
   paginas.forEach((p,i)=>{ nav.appendChild(document.createElement('i')); if(i>0) p.classList.add('pronta'); });
+  if(unica){ nav.style.visibility = 'hidden'; dica.classList.add('some'); }
   function marcar(n){ [...nav.children].forEach((d,i)=>d.classList.toggle('on', i===n)); }
 
   const vw = window.innerWidth, vh = window.innerHeight;
