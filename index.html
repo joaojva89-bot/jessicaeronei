@@ -191,6 +191,11 @@
     box-shadow:0 4px 12px rgba(90,59,50,.18); backdrop-filter:blur(4px);
   }
   body.entrou #som{display:flex}
+  #som.chamar::before{content:"toque para ouvir"; position:absolute; right:56px; white-space:nowrap;
+    font-family:'Cormorant Garamond',Georgia,serif; font-size:15px; letter-spacing:.12em; color:var(--marsala);
+    background:rgba(251,244,234,.92); border:1px solid rgba(184,134,59,.45); padding:6px 12px; border-radius:16px;
+    animation:aparece .8s ease 1.5s both, respira 2.4s ease-in-out 2.3s infinite}
+  #som.chamar{animation:respira 2.4s ease-in-out infinite}
   #som svg{width:20px;height:20px}
   #som .barras{display:flex;gap:3px;align-items:flex-end;height:16px}
   #som .barras b{width:3px;background:var(--marsala);border-radius:2px;animation:eq 1s ease-in-out infinite}
@@ -204,16 +209,6 @@
 </head>
 <body>
 
-  <!-- Abertura: a própria capa do convite. O toque libera a música (regra dos celulares) -->
-  <section id="abertura" role="button" aria-label="Abrir convite" tabindex="0">
-    <div class="carta">
-      <img class="base"   src="assets/base.webp"   alt="Convite de casamento Jéssica e Rônei">
-      <img class="aba"    src="assets/aba.webp"    alt="">
-      <span class="brilho"></span>
-      <img class="selo"   src="assets/selo.webp"   alt="">
-      <img class="clique" src="assets/clique.webp" alt="">
-    </div>
-  </section>
 
   <main id="paginas"><div id="livro">
 
@@ -355,11 +350,25 @@
     if(e.key==='ArrowRight') livro.flipNext(); if(e.key==='ArrowLeft') livro.flipPrev();
   });
 
-  abertura.addEventListener('click', abrir);
-  abertura.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') abrir(); });
+  // ---------- Sem carta: entra direto no Save the date ----------
+  // Celulares bloqueiam som automático: a música começa no primeiro toque na tela
+  function liberarMusica(e){
+    if(e && e.target && e.target.closest && e.target.closest('#som')) return;   // o próprio botão cuida disso
+    ['pointerdown','touchstart','keydown'].forEach(ev=> document.removeEventListener(ev, liberarMusica, true));
+    if(!audio.paused) return;
+    fadeIn(); audio.play().then(()=> som.classList.remove('mudo','chamar')).catch(()=>{});
+  }
+  function entrar(){
+    document.body.classList.add('entrou'); observarPaginas();
+    audio.play().then(()=>{ fadeIn(); }).catch(()=>{
+      som.classList.add('mudo','chamar');
+      ['pointerdown','touchstart','keydown'].forEach(ev=> document.addEventListener(ev, liberarMusica, {capture:true, passive:true}));
+    });
+  }
+  entrar();
 
   som.addEventListener('click', ()=>{
-    if(audio.paused){ audio.play().then(fadeIn).catch(()=>{}); som.classList.remove('mudo'); }
+    if(audio.paused){ audio.play().then(fadeIn).catch(()=>{}); som.classList.remove('mudo','chamar'); }
     else { audio.pause(); som.classList.add('mudo'); }
   });
 
