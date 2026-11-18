@@ -167,6 +167,22 @@
     padding:12px 22px; font-size:18px; text-align:center; width:max-content; box-shadow:0 8px 24px rgba(90,59,50,.2); transition:all .4s ease; max-width:86vw}
   #aviso.on{opacity:1; transform:translate(-50%,0)}
 
+  /* Contagem regressiva (página do Save the date) */
+  .quadro{container-type:inline-size}
+  .contagem{position:absolute; left:24.8%; top:89.4%; width:44%; text-align:center; pointer-events:none;
+    font-family:'Cormorant Garamond',Georgia,serif; color:#745a39; opacity:0; transform:translateY(10px);
+    transition:opacity 1.2s ease 5.2s, transform 1.2s ease 5.2s}
+  .visivel .contagem{opacity:1; transform:none}
+  .contagem .faltam{font-size:2.3cqw; letter-spacing:.42em; font-weight:600; margin-bottom:.6cqw; padding-left:.42em}
+  .contagem .relogio{display:flex; justify-content:center; align-items:flex-start}
+  .contagem .u{width:22%; display:flex; flex-direction:column; align-items:center}
+  .contagem .n{font-size:7.4cqw; line-height:1; font-weight:600; color:#761a2a; font-variant-numeric:lining-nums tabular-nums}
+  .contagem .l{font-size:2cqw; letter-spacing:.28em; font-weight:600; margin-top:.8cqw; padding-left:.28em}
+  .contagem .sep{font-size:5.6cqw; line-height:1.1; color:#b8863b; width:4%}
+  .contagem .n.tic{animation:tic .45s ease}
+  @keyframes tic{0%{opacity:.35; transform:translateY(-3px)}100%{opacity:1; transform:none}}
+  .contagem .chegou{font-size:6cqw; color:#761a2a; font-weight:600; letter-spacing:.04em}
+
   /* navegação: pontinhos + dica */
   #nav{position:fixed; left:50%; bottom:max(14px, env(safe-area-inset-bottom)); transform:translateX(-50%); z-index:15;
     display:none; gap:8px; align-items:center}
@@ -242,6 +258,15 @@
         <img class="nomes" src="assets/p3_save.webp" alt="">
         <img class="cresce div" src="assets/p3_div.webp" alt="">
         <img class="surge mes" src="assets/p3_mes.webp" alt="">
+        <div class="contagem" id="contagem" aria-live="off">
+          <div class="faltam">FALTAM</div>
+          <div class="relogio">
+            <div class="u"><span class="n" data-k="d">--</span><span class="l">DIAS</span></div><span class="sep">:</span>
+            <div class="u"><span class="n" data-k="h">--</span><span class="l">HORAS</span></div><span class="sep">:</span>
+            <div class="u"><span class="n" data-k="m">--</span><span class="l">MIN</span></div><span class="sep">:</span>
+            <div class="u"><span class="n" data-k="s">--</span><span class="l">SEG</span></div>
+          </div>
+        </div>
         <img class="abre linha" src="assets/p3_linha.webp" alt="">
       </div>
     </section>
@@ -421,6 +446,25 @@
     if(audio.paused){ audio.play().then(fadeIn).catch(()=>{}); som.classList.remove('mudo'); }
     else { audio.pause(); som.classList.add('mudo'); }
   });
+
+  // ---------- Contagem regressiva até 12/02/2027 às 20:30 (Brasília) ----------
+  (function(){
+    const alvo = new Date('2027-02-12T20:30:00-03:00').getTime();
+    const box = document.getElementById('contagem'); if(!box) return;
+    const el = {}; box.querySelectorAll('.n').forEach(n=> el[n.dataset.k]=n);
+    const dois = v=> String(v).padStart(2,'0');
+    function atualiza(){
+      let falta = Math.max(0, Math.floor((alvo - Date.now())/1000));
+      if(falta === 0){ box.innerHTML = '<div class="chegou">Chegou o grande dia! 💍</div>'; return false; }
+      const v = { d: Math.floor(falta/86400), h: Math.floor(falta%86400/3600), m: Math.floor(falta%3600/60), s: falta%60 };
+      for(const k in v){
+        const txt = k==='d' ? String(v[k]) : dois(v[k]);
+        if(el[k].textContent !== txt){ el[k].textContent = txt; el[k].classList.remove('tic'); void el[k].offsetWidth; el[k].classList.add('tic'); }
+      }
+      return true;
+    }
+    if(atualiza()){ const t = setInterval(()=>{ if(!atualiza()) clearInterval(t); }, 1000); }
+  })();
 
   // Pausa quando o convidado sai da aba e volta a tocar ao retornar
   let pausadoPorSaida = false;
