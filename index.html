@@ -191,11 +191,6 @@
     box-shadow:0 4px 12px rgba(90,59,50,.18); backdrop-filter:blur(4px);
   }
   body.entrou #som{display:flex}
-  #som.chamar::before{content:"toque para ouvir"; position:absolute; right:56px; white-space:nowrap;
-    font-family:'Cormorant Garamond',Georgia,serif; font-size:15px; letter-spacing:.12em; color:var(--marsala);
-    background:rgba(251,244,234,.92); border:1px solid rgba(184,134,59,.45); padding:6px 12px; border-radius:16px;
-    animation:aparece .8s ease 1.5s both, respira 2.4s ease-in-out 2.3s infinite}
-  #som.chamar{animation:respira 2.4s ease-in-out infinite}
   #som svg{width:20px;height:20px}
   #som .barras{display:flex;gap:3px;align-items:flex-end;height:16px}
   #som .barras b{width:3px;background:var(--marsala);border-radius:2px;animation:eq 1s ease-in-out infinite}
@@ -209,9 +204,31 @@
 </head>
 <body>
 
+  <!-- Abertura: a própria capa do convite. O toque libera a música (regra dos celulares) -->
+  <section id="abertura" role="button" aria-label="Abrir convite" tabindex="0">
+    <div class="carta">
+      <img class="base"   src="assets/base.webp"   alt="Convite de casamento Jéssica e Rônei">
+      <img class="aba"    src="assets/aba.webp"    alt="">
+      <span class="brilho"></span>
+      <img class="selo"   src="assets/selo.webp"   alt="">
+      <img class="clique" src="assets/clique.webp" alt="">
+    </div>
+  </section>
 
   <main id="paginas"><div id="livro">
 
+    <!-- Página 2 · Mateus 19:6 -->
+    <section class="pagina p2" id="versiculo" data-density="soft">
+      <div class="quadro">
+        <img class="fundo" src="assets/p2_base.webp" alt="Jéssica e Rônei abraçados. Assim, eles já não são dois, mas sim uma só carne. Portanto, ninguém separe o que Deus uniu. Mateus 19:6">
+        <img class="escreve l1" src="assets/p2_l1.webp" alt="">
+        <img class="escreve l2" src="assets/p2_l2.webp" alt="">
+        <img class="escreve l3" src="assets/p2_l3.webp" alt="">
+        <img class="escreve l4" src="assets/p2_l4.webp" alt="">
+        <img class="cresce div" src="assets/p2_div.webp" alt="">
+        <img class="surge ref" src="assets/p2_ref.webp" alt="">
+      </div>
+    </section>
 
     <!-- Página 3 · Data -->
     <section class="pagina p3" id="data" data-density="soft">
@@ -229,7 +246,54 @@
       </div>
     </section>
 
+    <!-- Página 4 · Convite -->
+    <section class="pagina p4" id="convite" data-density="soft">
+      <div class="quadro">
+        <img class="fundo" src="assets/p4_base.webp" alt="Juntos, para sempre. Jéssica e Rônei convidam você para o seu casamento. Paróquia Imaculado Coração de Maria, St. C Norte QNC 12, Taguatinga, Brasília - DF. 12 de fevereiro de 2027. Sua presença tornará este dia ainda mais especial.">
+        <span class="brilhoJR"></span>
+        <span class="faisca" style="left:35%;top:4%;animation-delay:1.8s"></span>
+        <span class="faisca" style="left:63%;top:8%;animation-delay:2.7s"></span>
+        <span class="faisca" style="left:62%;top:19%;animation-delay:3.5s"></span>
+        <span class="faisca" style="left:36%;top:16%;animation-delay:4.3s"></span>
+        <img class="surge juntos" src="assets/p4_juntos.webp" alt="">
+        <img class="cresce div1" src="assets/p4_div1.webp" alt="">
+        <img class="mao nomes" src="assets/p4_nomes.webp" alt="">
+        <img class="surge convidam" src="assets/p4_convidam.webp" alt="">
+        <a class="local" href="https://www.google.com/maps/search/?api=1&query=Par%C3%B3quia+Imaculado+Cora%C3%A7%C3%A3o+de+Maria+QNC+12+Taguatinga+Bras%C3%ADlia+DF" target="_blank" rel="noopener" aria-label="Abrir no mapa: Paróquia Imaculado Coração de Maria, St. C Norte QNC 12, Taguatinga, Brasília - DF">
+          <img class="cai pin" src="assets/p4_pin.webp" alt="">
+          <img class="escreve ig1" src="assets/p4_ig1.webp" alt="">
+          <img class="escreve ig2" src="assets/p4_ig2.webp" alt="">
+          <img class="cresce div3" src="assets/p4_div3.webp" alt="">
+          <img class="surge en1" src="assets/p4_en1.webp" alt="">
+          <img class="surge en2" src="assets/p4_en2.webp" alt="">
+          <img class="surge mapa" src="assets/p4_mapa.webp" alt="">
+        </a>
+        <img class="cresce div2" src="assets/p4_div2.webp" alt="">
+        <img class="abre data" src="assets/p4_data.webp" alt="">
+        <img class="escreve pres1" src="assets/p4_pres1.webp" alt="">
+        <img class="escreve pres2" src="assets/p4_pres2.webp" alt="">
+      </div>
+    </section>
 
+    <!-- Página 5 · Opções -->
+    <section class="pagina p5" id="opcoes" data-density="soft">
+      <div class="quadro">
+        <img class="fundo" src="assets/p5_base.webp" alt="Toque nos ícones para interagir">
+        <span class="brilhoJR"></span>
+        <span class="faisca" style="left:36%;top:13%;animation-delay:1.8s"></span>
+        <span class="faisca" style="left:63%;top:17%;animation-delay:2.7s"></span>
+        <span class="faisca" style="left:62%;top:28%;animation-delay:3.5s"></span>
+        <img class="surge toque" src="assets/p5_toque.webp" alt="">
+        <img class="mao interagir" src="assets/p5_interagir.webp" alt="">
+        <img class="cresce div" src="assets/p5_div.webp" alt="">
+        <a class="botao b1" data-link="chegar" target="_blank" rel="noopener" aria-label="Saiba como chegar">
+          <span class="pop"><span class="onda"></span><img src="assets/p5_b1.webp" alt=""><span class="estouro"></span></span></a>
+        <a class="botao b2" data-link="confirmar" target="_blank" rel="noopener" aria-label="Confirmar presença">
+          <span class="pop"><span class="onda"></span><img src="assets/p5_b2.webp" alt=""><span class="estouro"></span></span></a>
+        <a class="botao b3" data-link="presentear" target="_blank" rel="noopener" aria-label="Para nos presentear">
+          <span class="pop"><span class="onda"></span><img src="assets/p5_b3.webp" alt=""><span class="estouro"></span></span></a>
+      </div>
+    </section>
 
   </div></main>
 
@@ -249,14 +313,14 @@
   // ====== MODO DO CONVITE ======
   //  'save-the-date' → depois da carta, mostra só a página do Save the date
   //  'completo'      → mostra todas as páginas (versículo, save the date, convite, opções)
-  const MODO = 'save-the-date';
+  const MODO = 'completo';
   // ==============================
 
   // ====== LINKS DOS BOTÕES · preencher quando chegarem as informações ======
   const LINKS = {
-    chegar:     '',
-    confirmar:  '',
-    presentear: ''
+    chegar:     'https://www.google.com/maps/search/?api=1&query=Par%C3%B3quia+Imaculado+Cora%C3%A7%C3%A3o+de+Maria+QNC+12+Taguatinga+Bras%C3%ADlia+DF',
+    confirmar:  'https://wa.me/5561991685030?text=Ol%C3%A1%2C%20gostaria%20de%20confirmar%20a%20minha%20presen%C3%A7a%20para%20o%20Casamento%20da%20J%C3%A9ssica%20e%20R%C3%B4nei%21',
+    presentear: 'https://noivos.casar.com/jessica-e-ronei'
   };
   // ========================================================================
 
@@ -350,25 +414,11 @@
     if(e.key==='ArrowRight') livro.flipNext(); if(e.key==='ArrowLeft') livro.flipPrev();
   });
 
-  // ---------- Sem carta: entra direto no Save the date ----------
-  // Celulares bloqueiam som automático: a música começa no primeiro toque na tela
-  function liberarMusica(e){
-    if(e && e.target && e.target.closest && e.target.closest('#som')) return;   // o próprio botão cuida disso
-    ['pointerdown','touchstart','keydown'].forEach(ev=> document.removeEventListener(ev, liberarMusica, true));
-    if(!audio.paused) return;
-    fadeIn(); audio.play().then(()=> som.classList.remove('mudo','chamar')).catch(()=>{});
-  }
-  function entrar(){
-    document.body.classList.add('entrou'); observarPaginas();
-    audio.play().then(()=>{ fadeIn(); }).catch(()=>{
-      som.classList.add('mudo','chamar');
-      ['pointerdown','touchstart','keydown'].forEach(ev=> document.addEventListener(ev, liberarMusica, {capture:true, passive:true}));
-    });
-  }
-  entrar();
+  abertura.addEventListener('click', abrir);
+  abertura.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') abrir(); });
 
   som.addEventListener('click', ()=>{
-    if(audio.paused){ audio.play().then(fadeIn).catch(()=>{}); som.classList.remove('mudo','chamar'); }
+    if(audio.paused){ audio.play().then(fadeIn).catch(()=>{}); som.classList.remove('mudo'); }
     else { audio.pause(); som.classList.add('mudo'); }
   });
 
